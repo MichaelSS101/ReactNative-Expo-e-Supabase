@@ -4,14 +4,19 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Colors.screen,
+        backgroundColor: '#0f1012',
     },
 
     title: {
-        fontSize: 32,
-        marginBottom: 60,
+        color: '#fff',
+        bottom: 40,
+        fontSize: 64,
+        fontStyle: 'italic',
+        textAlign: 'center',
         fontWeight: 'bold',
-        color: '#f1f1f1ff'
+        textShadowColor: '#000',
+        textShadowOffset: { width: 5, height: 5 },
+        textShadowRadius: 4,
     },
     header: {
         width: '100%',
@@ -21,8 +26,8 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
     },
     backButton: {
-        backgroundColor: 'rgba(236, 236, 236, 0.5)',
-        borderRadius: 10,
+        backgroundColor: 'rgba(255, 255, 255, 0.08)',
+        borderRadius: 50,
         width: 35,
         height: 35,
         alignSelf: 'flex-start',

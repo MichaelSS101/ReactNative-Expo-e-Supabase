@@ -20,7 +20,7 @@ function MainLayout() {
 
       if (session){
         setAuth(session.user)
-        router.replace('/(panel)/profile/page')
+        router.replace('/(panel)/main/page')
         return;
       }
 

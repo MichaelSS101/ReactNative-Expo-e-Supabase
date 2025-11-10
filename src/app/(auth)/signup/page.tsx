@@ -55,7 +55,7 @@ export default function SignUp() {
                         >
                             <Ionicons name='arrow-back' size={24} color={Colors.softWhite} />
                         </Pressable>
-                        <Text style={styles.title}>Teste!</Text>
+                        <Text style={styles.title}>Odontyc!</Text>
                     </View>
 
                     <View style={styles.main}>

@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#1b1b1bff',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     header: {
         width: '100%',
@@ -24,11 +24,19 @@ export const styles = StyleSheet.create({
         marginTop: 40,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: Colors.darkGray,
+        backgroundColor: 'black'
     },
     footer: {
         width: '100%',
-        bottom: 70,
-    }
-
-})
+        bottom: 20,
+    },
+    backButton: {
+        position: 'absolute',
+        top: 40,
+        left: 20,
+        backgroundColor: 'rgba(255, 255, 255, 0.08)',
+        borderRadius: 50,
+        padding: 10,
+        zIndex: 10,
+    },
+});

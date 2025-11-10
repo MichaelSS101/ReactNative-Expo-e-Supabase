@@ -9,6 +9,8 @@ import { styles } from './styles';
 
 import * as ImagePicker from 'expo-image-picker';
 import { useEffect, useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 
 export default function Profile() {
   const [name, setName] = useState<string | null>(null);
@@ -18,6 +20,7 @@ export default function Profile() {
   const [uploading, setUploading] = useState(false);
 
   const { setAuth } = useAuth();
+  const router = useRouter();
 
   async function handleSignout() {
     const { error } = await supabase.auth.signOut();
@@ -73,7 +76,7 @@ export default function Profile() {
     }
 
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: 'images',
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [1, 1],
       quality: 0.7,
@@ -87,7 +90,6 @@ export default function Profile() {
       const fileUri = result.assets[0].uri;
       const fileExt = fileUri.split('.').pop();
       const fileName = `${user.id}-${Date.now()}.${fileExt}`;
-
 
       const response = await fetch(fileUri);
       const buffer = await response.arrayBuffer();
@@ -128,37 +130,43 @@ export default function Profile() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={{ fontSize: 32, fontWeight: 'bold', color: Colors.softWhite }}>Perfil</Text>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#1b1b1bff' }}>
+      <View style={styles.container}>
 
-        <TouchableOpacity style={styles.foto} activeOpacity={0.8} onPress={handlePickImage}>
-          {avatarUrl ? (
-            <Image
-              source={{ uri: avatarUrl }}
-              style={{width: 180, height: 180, borderRadius: 100,}}
-            />
-          ) : (
-            
-            <Ionicons name='pencil' size={24} color={'black'}
-            style={{alignSelf: 'flex-end', top: 70, right: 10, borderRadius: 50, borderWidth: 10, borderColor: 'rgb(255, 255, 255)', backgroundColor: 'rgb(255, 255, 255)'}} />
-          )}
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => router.push('../main/page')}
+          activeOpacity={0.7}
+        >
+          <Ionicons name="arrow-back" size={28} color={Colors.softWhite} />
         </TouchableOpacity>
 
-        {uploading && <ActivityIndicator size="small" color={Colors.softWhite} />}
+        <View style={styles.header}>
+          <Text style={{ fontSize: 32, fontWeight: 'bold', color: Colors.softWhite }}>Perfil</Text>
 
-        <Text style={{ fontSize: 32, fontWeight: 'bold', color: Colors.softWhite, marginTop: 20 }}>
-          {name}
-        </Text>
+          <TouchableOpacity style={styles.foto} activeOpacity={0.8} onPress={handlePickImage}>
+            {avatarUrl ? (
+              <Image source={{ uri: avatarUrl }} style={{ width: '100%', height: '100%', borderRadius: 999, alignSelf: 'center' }} />
+            ) : (
+              <Ionicons name="person" size={64} color={Colors.softWhite} />
+            )}
+          </TouchableOpacity>
 
-        <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'rgba(224, 224, 224, 0.6)', marginTop: 8 }}>
-          {email}
-        </Text>
+          {uploading && <ActivityIndicator size="small" color={Colors.softWhite} />}
+
+          <Text style={{ fontSize: 32, fontWeight: 'bold', color: Colors.softWhite, marginTop: 20 }}>
+            {name}
+          </Text>
+
+          <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'rgba(224, 224, 224, 0.6)', marginTop: 8 }}>
+            {email}
+          </Text>
+        </View>
+
+        <View style={styles.footer}>
+          <Button title="Sair da conta" onPress={handleSignout} />
+        </View>
       </View>
-
-      <View style={styles.footer}>
-        <Button title="Sair da conta" onPress={handleSignout} />
-      </View>
-    </View>
+    </SafeAreaView>
   );
 }

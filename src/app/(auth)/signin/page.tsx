@@ -41,7 +41,7 @@ export default function Registrar() {
             <ScrollView style={{flex: 1}}>
                 <View style={styles.container}>
                     <View style={styles.header}>
-                        <Text style={styles.title}>Teste!</Text>
+                        <Text style={styles.title}>Odontyc!</Text>
                     </View>
 
                     <View style={styles.main}>
