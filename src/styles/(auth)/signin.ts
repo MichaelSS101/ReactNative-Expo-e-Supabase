@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
 
     title: {
         color: '#fff',
-        fontSize: 68, 
+        fontSize: 78, 
         fontFamily: 'CreamCake',
         textAlign: 'center',
         textShadowColor: '#000',
